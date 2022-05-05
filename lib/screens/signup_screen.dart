@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:instagram_flutter_clone/resources/auth_methods.dart';
 
 import '../utils/colors.dart';
 import '../widgets/text_field_input.dart';
@@ -52,15 +53,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 children: [
                   const CircleAvatar(
                     radius: 64,
-                    backgroundImage: NetworkImage('https://images.unsplash.com/photo-1651608048517-88b2311ca0d9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxMHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60'),
+                    backgroundImage: NetworkImage(
+                        'https://images.unsplash.com/photo-1651608048517-88b2311ca0d9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxMHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60'),
                   ),
                   Positioned(
-                    bottom: -10,
+                      bottom: -10,
                       left: 80,
                       child: IconButton(
-                    onPressed: () {},
-                    icon: const Icon(Icons.add_a_photo),
-                  ))
+                        onPressed: () {},
+                        icon: const Icon(Icons.add_a_photo),
+                      ))
                 ],
               ),
               const SizedBox(
@@ -100,6 +102,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 height: 24,
               ),
               InkWell(
+                onTap: () async {
+                  String res = await AuthMethods().signUpUser(
+                    email: _emailController.text,
+                    password: _passwordController.text,
+                    username: _usernameController.text,
+                    bio: _bioController.text,
+                  );
+                },
                 child: Container(
                   child: const Text('Log in'),
                   width: double.infinity,
